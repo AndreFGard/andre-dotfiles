@@ -1,0 +1,49 @@
+# Apply gtk theming
+exec_always ~/.config/sway/scripts/import-gsettings
+
+# Set inner/outer gaps
+gaps inner 3
+gaps outer 3
+
+
+# Set corner
+corner_radius 6
+
+# Set shadows
+shadows enable
+
+# Hide titlebar on windows:
+#default_border normal 5 10 
+#default_floating_border normal 5
+default_border pixel 1
+#exec swaybg -i ~/.config/sway/sway.png
+#exec swaybg -i /home/guaxim/Downloads/EOS-gradient-apollo.png
+exec swaybg -i ~/Downloads/wallpapers/landscapes/evening-sky.png
+
+
+# Title format for windows
+for_window [shell="xdg_shell"] title_format "%title (%app_id)"
+for_window [shell="x_wayland"] title_format "%class - %title"
+
+# class                 border  bground text    indicator child_border
+#client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
+#ABE9B3 green
+client.focused          #DDB6F2 #414559 #F8F8F2 #DDB6F2   #DDB6F2
+
+client.focused_inactive #626880 #626880 #F8F8F2 #626880   #626880
+
+#client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
+#client.unfocused        #232634 #232634 #BFBFBF #232634   #232634
+#232634 dark gray #626880
+
+client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
+client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
+client.background       #F8F8F2
+
+#
+# Status Bar:
+#
+# Read `man 5 sway-bar` for more information about this section.
+#bar {
+#    swaybar_command waybar -c ~/.config/waybar/taskbar-config -s ~/.config/waybar/taskbar.css
+#}

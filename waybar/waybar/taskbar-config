@@ -1,0 +1,138 @@
+{
+	"position": "bottom",
+	"margin-bottom": 3,
+	"margin-left": 5,
+	"margin-right": 5,
+	"layer": "top",
+	"modules-left": ["custom/launcher", "sway/workspaces", "cpu","memory", "temperature", "tray"],
+	"modules-center": ["wlr/taskbar","custom/media"],
+	"modules-right": ["clock#1","bluetooth","pulseaudio","clock", "battery","custom/power"],
+	"COMMENT": ["backlight removed to gain space"],
+	
+	
+	
+	"bluetooth": {
+		"format": " {}",
+		"format-disabled": "",
+		"format-connected": " QCY",
+		"on-click": "exec rfkill unblock bluetooth & sleep 2 && bluetoothctl connect A8:4D:4A:1D:82:7B",
+		"on-click-right": "exec bluetoothctl disconnect A8:4D:4A:1D:82:7B & sleep 2 && exec rfkill block bluetooth"
+		
+	},
+	"pulseaudio": {
+		"tooltip": false,
+		"scroll-step": 5,
+		"on-scroll-up": "pamixer -ui 2 --allow-boost --set-limit 150",
+		"on-scroll-down": "pamixer -ud 2 --allow-boost --set-limit 150",
+		"smooth-scrolling-threshold": 1,
+		"format": "{icon} {volume}%",
+		"format-muted": "{icon} {volume}%",
+		"on-click":"pactl set-sink-mute @DEFAULT_SINK@ toggle",
+		"on-click-right": "exec pavucontrol",
+		"format-icons": {
+			"default": ["", "", ""]
+		}
+	},
+	
+	"wlr/taskbar": {
+		"icon-theme": "Numix-Circle",
+		"icon-size": 22,
+		"on-click": "activate",
+		"on-click-right": "minimize",
+		"format": "{icon}"
+	},
+
+	
+	
+	"sway/workspaces": {
+		"disable-scroll": false,
+        "smooth-scrolling-threshold": 2,
+		"format": "{name}"
+	},
+
+    "river/tags": {
+		"num-tags": 6
+    },
+	"network": {
+		"tooltip": false,
+		"format-wifi": "  {essid}",
+		"format-ethernet": ""
+	},
+	"backlight": {
+		"tooltip": false,
+		"format": " {}%",
+		"interval":1,
+      		"on-scroll-down": "brightnessctl -c backlight set 2%-",
+        	"on-scroll-up": "brightnessctl -c backlight set +2%",
+	},
+ 	"battery": {
+      	 	"on-scroll-down": "brightnessctl -c backlight set 2%-",
+       	 	"on-scroll-up": "brightnessctl -c backlight set +2%",
+       	 	"on-click": "/home/guaxim/.config/sway/scripts/powerprofiles.sh",
+        "states": {
+         	"good": 95,
+        	"warning": 30,
+        	"critical": 15
+        },
+        "format": "{icon}  {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-alt": "{time} {icon}",
+        "format-icons": ["", "", "", "", ""]
+    },
+	"tray":{
+		"icon-size":18,
+		"spacing": 10
+	},
+    "clock": {
+        "format": "{: %a %p  %d/%m}"
+    },
+    "cpu": {
+        "interval": 11,
+        "format": "{usage:2}%",
+        "max-length": 10
+    },
+    "memory": {
+        "interval": 37,
+        "format": " {}%",
+        "max-length": 10
+    },
+    "custom/media": {
+        "interval": 31,
+        "format": "{icon} {}",
+        "return-type": "json",
+        "max-length": 20,
+        "format-icons": {
+            "spotify": " ",
+            "default": " "
+        },
+        "escape": true,
+        "exec": "$HOME/.config/system_scripts/mediaplayer.py 2> /dev/null",
+        "on-click": "playerctl play-pause"
+    },
+    "custom/launcher":{
+        "format": "",
+        //"on-click": "j4-dmenu-desktop --dmenu='rofi -show drun'",
+        "on-click": "ulauncher-toggle",
+        "on-click-right": "killall rofi"
+    },
+    "temperature":{
+	"format": "{temperatureC}°C ",
+	"interval": 62
+    },
+    "custom/power":{
+        "format": "",
+        "on-click": "bash ~/.config/waybar/scripts/power-menu.sh",
+    },
+    "custom/updates":{
+        "format": "{} Update(s)",
+        "exec": "checkupdates | wc -l",
+        "exec-if": "[[ $(checkupdates | wc -l) != 0 ]]",
+        "interval": 15,
+        "on-click": "alacritty -e paru -Syu && notify-send 'The system has been updated' "
+    },
+    "custom/wallpaper":{
+        "format":" ",
+        "on-click": "bash ~/.config/system_scripts/pkill_bc"
+    }
+}

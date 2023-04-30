@@ -1,0 +1,28 @@
+# Auth with polkit-gnome:
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+
+# Desktop notifications
+exec mako
+
+exec killall plasmashell
+
+
+# Network Applet
+exec nm-applet --indicator
+
+# GTK3 applications take a long time to start
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+exec hash dbus-update-activation-environment 2>/dev/null && \
+     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+     
+# Welcome App
+#exec dex -a -s /etc/xdg/autostart/:~/.config/autostart/  
+
+# Sway Fader
+# exec python3 ~/.config/sway/scripts/swayfader.py      
+
+exec foot --server
+exec MOZ_ENABLE_WAYLAND=1 ulauncher --hide-window
+exec autotiling -w 1 3 5 7 9
+
+exec waybar -c /home/guaxim/.config/waybar/taskbar-config -s /home/guaxim/.config/waybar/taskbar.css
