@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # List of folder names to copy
-folders=("foot" "waybar" "wofi" "sway")
+folders=("foot" "waybar" "wofi" "sway" "tofi")
 config=$HOME/.config
 # Loop through each folder in the list
 for folder in "${folders[@]}"; do

@@ -1,7 +1,7 @@
 #!/bin/bash
 CONFIG=$HOME/.config
 # Array of folder names to copy
-folders=("waybar" "wofi" "sway")
+folders=("waybar" "wofi" "sway" "foot" "tofi")
 B=$PWD
 
 # Loop through each folder in the array
